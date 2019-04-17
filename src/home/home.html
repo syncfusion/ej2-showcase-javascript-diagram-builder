@@ -1,0 +1,738 @@
+<ul id = "arrangeContextMenu"></ul>
+<div class='diagrambuilder-container' style="display: none;">
+    <div class='header navbar'>
+        <div class="db-header-container">
+            <div class="db-diagram-name-container">
+                <span id='diagramName' style="width:250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="db-diagram-name"
+                    onclick="renameDiagram(event)">Untitled Diagram</span>
+                <input id='diagramEditable' type="text" class="db-diagram-name" onkeydown="diagramNameKeyDown(event)" onfocusout= "diagramNameChange(event)"/>
+                <span id='diagramreport' class="db-diagram-name db-save-text"></span>
+            </div>
+            <div class='db-menu-container'>
+                <div class="db-menu-style">
+                        <button id="btnFileMenu"></button>
+                </div>
+                <div class="db-menu-style">
+                        <button id="btnEditMenu"></button>
+                </div>
+                <div class="db-menu-style">
+                        <button id="btnViewMenu"></button>
+                </div>
+                <div class="db-menu-style">
+                        <button id="btnArrangeMenu"></button>
+                </div>
+                <div class="db-menu-style">
+                        <button id="btnWindowMenu"></button>
+                </div>
+                <div class="db-menu-style" style="display: none">
+                        <button id="btnHelpMenu"></button>
+                </div>
+            </div>
+        </div>
+        <div class='db-toolbar-editor'>
+            <div class='db-toolbar-container'>
+                    <div id="toolbarEditor"></div>
+            </div>
+            <div class="db-toolbar-hide-btn">
+                    <button id="btnHideToolbar"></button>
+            </div>
+        </div>
+    </div>
+    <div class='row content'>
+        <div class='sidebar show-overview'>
+            <div class="db-palette-parent">
+                <div id="symbolpalette"></div>
+            </div>
+            <div class="db-overview-parent">
+                <div id="overview"></div>
+            </div>
+            <div id="moreShapesDiv" class="db-palette-more-shapes">
+                <div id='overviewspan' class="db-overview">
+                    <span></span>
+                </div>
+                <div class="db-palette-more-shapes-text" onclick="moreShapesClick(this)">More Shapes</div>
+            </div>
+        </div>
+        <div class='main-content' role='main'>
+            <div class="db-diagram-container">
+                <div id="diagramContainerDiv" class='db-current-diagram-container'>
+                    <div id="diagram"></div>
+                </div>
+                <div class="db-more-diagram-options-container">
+                    <div id="pageOptionList">
+                    </div>
+                </div>
+            </div>
+            <div class='db-property-editor-container' style="overflow:auto;">
+                <div id="generalDiagramContainer" class="db-general-diagram-prop-container">
+                    <div id='diagramPropertyContainer' class="db-diagram-prop-container">
+                        <div class="row db-prop-header-text">
+                            Page Settings
+                        </div>
+                        <div class="row db-prop-row">
+                                <input type="text" id='pageSettingsList' />
+                        </div>
+                        <div class="row db-prop-row" id="pageOrientation">
+                            <div class="col-xs-3 db-prop-col-style" style="margin-right: 8px;width: 30%;">
+                                    <input id="pagePortrait" type="radio">
+                            </div>
+                            <div class="col-xs-3 db-prop-col-style">
+                                    <input id="pageLandscape" type="radio">
+                            </div>
+                        </div>
+                        <div class="row db-prop-row" id='pageDimension' style="display:none">
+                            <div class="col-xs-6 db-col-left">
+                                <div class="db-text-container">
+                                    <div class="db-text">
+                                        <span>W</span>
+                                    </div>
+                                    <div class="db-text-input">
+                                        <input id="pageWidth" type="text" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 db-col-right">
+                                <div class="db-text-container">
+                                    <div class="db-text">
+                                        <span>H</span>
+                                    </div>
+                                    <div class="db-text-input">
+                                            <input id="pageHeight" type="text" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row db-prop-row">
+                            <div class="col-xs-6 db-col-left">
+                                <div class="db-color-container">
+                                    <div class="db-color-input">
+                                            <input id="pageBgColor" type="color">
+                                    </div>
+                                    <div class="db-color-btn">
+                                            <button id="pageBgColorPickerBtn"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row db-prop-row">
+                                <input id="showPageBreaks" type="checkbox" />
+                        </div>
+                    </div>
+                    <div id='nodePropertyContainer' class="db-node-prop-container" style="display:none">
+                        <div class="db-node-behaviour-prop">
+                            <div class="row db-prop-header-text">
+                                Dimensions
+                            </div>
+                            <div class="row db-prop-row">
+                                <div class="col-xs-6 db-col-left">
+                                    <div class="db-text-container">
+                                        <div class="db-text">
+                                            <span>X</span>
+                                        </div>
+                                        <div class="db-text-input">
+                                            <input id="nodeOffsetX" type="text" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 db-col-right">
+                                    <div class="db-text-container">
+                                        <div class="db-text">
+                                            <span>Y</span>
+                                        </div>
+                                        <div class="db-text-input">
+                                                <input id="nodeOffsetY" type="text" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row db-prop-row">
+                                <div class="col-xs-6 db-col-left">
+                                    <div class="db-text-container">
+                                        <div class="db-text">
+                                            <span>W</span>
+                                        </div>
+                                        <div class="db-text-input">
+                                                <input id="nodeWidth" type="text" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 db-col-right">
+                                    <div class="db-text-container">
+                                        <div class="db-text">
+                                            <span>H</span>
+                                        </div>
+                                        <div class="db-text-input">
+                                                <input id="nodeHeight" type="text" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row db-prop-row">
+                                <div class="col-xs-6 db-col-left">
+                                        <input id="aspectRatio" type="checkbox" />
+                                </div>
+                            </div>
+                            <div class="row db-prop-row">
+                                <div class="col-xs-6 db-col-left">
+                                    <span class="db-prop-text-style">Rotate</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 db-col-left">
+                                    <div class="db-text-container">
+                                        <div class="db-text">
+                                                <button id="rotateIconBtn"></button>
+                                        </div>
+                                        <div class="db-text-input">
+                                                <input id="nodeRotateAngle" type="text" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="db-prop-separator">
+                            </div>
+                            <div class="row db-prop-header-text">
+                                Insert
+                            </div>
+                            <div class="row db-prop-row">
+                                <div class="col-xs-6 db-col-left">
+                                    <div id="toolbarNodeInsert"></div>
+                                </div>
+                            </div>
+                            <div class="db-prop-separator">
+                            </div>
+                        </div>
+                        <div id='nodeStyleProperties' class="db-node-style-prop">
+                            <div class="row db-background-style">
+                                <div class="row db-prop-header-text">
+                                    Background and Border Styles
+                                </div>
+                                <div class="row db-prop-row">
+                                    <div class="col-xs-6 db-col-left">
+                                        <div class="db-color-container">
+                                            <div class="db-color-input">
+                                                <input id="nodeFillColor" type="color">
+                                            </div>
+                                            <div class="db-color-btn">
+                                                    <button id="fillColorIconBtn"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id='gradientStyle' class="row db-prop-row db-gradient-style-hide">
+                                    <div class="col-xs-4 db-col-left">
+                                            <input id="gradient" type="checkbox" />
+                                    </div>
+                                    <div class="col-xs-4 db-col-center">
+                                            <input type="text" id='gradientDirectionDropdown' />
+                                    </div>
+                                    <div class="col-xs-4 db-col-right">
+                                        <div class="db-color-container">
+                                            <div class="db-color-input">
+                                                    <input id="nodeGradientColor" type="color">
+                                            </div>
+                                            <div class="db-color-btn">
+                                                    <button id="gradientColorIconBtn"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row db-border-style">
+                                <div class="row db-prop-header-text db-border-style-header">
+                                    Border/Line Styles
+                                </div>
+                                <div class="row db-prop-row">
+                                    <div class="col-xs-4 db-col-right">
+                                        <span class="db-prop-text-style">Stroke Color</span>
+                                    </div>
+                                    <div class="col-xs-4 db-col-center">
+                                        <span class="db-prop-text-style">Stroke Style</span>
+                                    </div>
+                                    <div class="col-xs-4 db-col-left">
+                                        <span class="db-prop-text-style">Stroke Width</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4 db-col-left">
+                                        <div class="db-color-container">
+                                            <div class="db-color-input">
+                                                    <input id="nodeStrokeColor" type="color">
+                                            </div>
+                                            <div class="db-color-btn">
+                                                    <button id="strokeColorIconBtn"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 db-col-center">
+                                        <input type="text" id='nodeBorderStyle' />
+                                    </div>
+                                    <div class="col-xs-4 db-col-right">
+                                            <input id="nodeStrokeWidth" type="text" />
+                                    </div>
+                                </div>
+                                <div class="row db-prop-row">
+                                    <div class="col-xs-2 db-col-right db-prop-text-style" style="padding-top: 6px">
+                                        <span class="db-prop-text-style">Opacity</span>
+                                    </div>
+                                    <div class="col-xs-8 db-col-left" style="padding-right:10px">
+                                        <div id='nodeOpacitySlider'></div>
+                                    </div>
+                                    <div class="col-xs-2 db-col-right">
+                                        <input id="nodeOpacitySliderText" type="text" value= '100%' readOnly="true" class="db-readonly-input" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id='connectorPropertyContainer' class="db-connector-prop-container" style="display:none">
+                        <div class="row db-prop-header-text">
+                            Connector Properties
+                        </div>
+                        <div class="row db-prop-row">
+                            <div class="col-xs-6 db-col-left db-prop-text-style">
+                                <span class="db-prop-text-style">Connector Type</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 db-col-left">
+                                    <input type="text" id='lineTypeDropdown' />
+                            </div>
+                        </div>
+                        <div class="row db-prop-row">
+                            <div class="col-xs-6 db-col-left">
+                                <div class="db-color-container">
+                                    <div class="db-color-input">
+                                        <input id="lineColor" type="color">
+                                    </div>
+                                    <div class="db-color-btn">
+                                            <button id="lineColorIconBtn"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row db-prop-row">
+                            <div class="col-xs-8 db-col-left db-prop-text-style">
+                                <span class="db-prop-text-style">Stroke Style</span>
+                            </div>
+                            <div class="col-xs-4 db-col-right db-prop-text-style">
+                                <span class="db-prop-text-style">Thickness</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8 db-col-left">
+                                    <input type="text" id='lineStyle' />
+                            </div>
+                            <div class="col-xs-4 db-col-right">
+                                    <input id="lineWidth" type="text" />
+                            </div>
+                        </div>
+                        <div class="row db-prop-row">
+                            <div class="col-xs-8 db-col-left db-prop-text-style">
+                                <span class="db-prop-text-style">Start Arrow</span>
+                            </div>
+                            <div class="col-xs-4 db-col-right db-prop-text-style">
+                                <span class="db-prop-text-style">Size</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8 db-col-left">
+                                    <input type="text" id='sourceType' />
+                            </div>
+                            <div class="col-xs-4 db-col-right">
+                                    <input id="sourceSize" type="text" />
+                            </div>
+                        </div>
+                        <div class="row db-prop-row">
+                            <div class="col-xs-8 db-col-left db-prop-text-style">
+                                <span class="db-prop-text-style">End Arrow</span>
+                            </div>
+                            <div class="col-xs-4 db-col-right db-prop-text-style">
+                                <span class="db-prop-text-style">Size</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8 db-col-left">
+                                    <input type="text" id='targetType' />
+                            </div>
+                            <div class="col-xs-4 db-col-right">
+                                    <input id="targetSize" type="text" />
+                            </div>
+                        </div>
+                        <div class="row db-prop-row">
+                            <div class="col-xs-8 db-col-left" style="margin-top:5px">
+                                    <input id="lineJump" type="checkbox" />
+                            </div>
+                            <div class="col-xs-4 db-col-right" id="lineJumpSizeDiv" style="display:none">
+                                    <input id="lineJumpSize" type="text" />
+                            </div>
+                        </div>
+                        <div class="row db-prop-row">
+                            <div class="col-xs-2 db-col-right db-prop-text-style" style="padding-top: 6px">
+                                <span class="db-prop-text-style">Opacity</span>
+                            </div>
+                            <div class="col-xs-8 db-col-left" style="padding-right:10px">
+                                    <div id='default1'></div>
+                            </div>
+                            <div class="col-xs-2 db-col-right">
+                                <input type="text" id="connectorOpacitySliderText" value= '100%' readonly="true" class="db-readonly-input" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id='textPropertyContainer' class="db-text-prop-container" style="display:none">
+                        <div class="db-prop-separator">
+                        </div>
+                        <div class="row db-prop-header-text">
+                            Text
+                        </div>
+                        <div class="row db-prop-row">
+                            <div class="col-xs-8 db-col-left">
+                                    <input type="text" id='fontFamily' />
+                            </div>
+                            <div class="col-xs-4 db-col-right">
+                                    <input id="fontSizeTextProperties" type="text" />
+                            </div>
+                        </div>
+                        <div class="row db-prop-row">
+                            <div class="col-xs-6 db-col-left" id="textPositionDiv">
+                                    <input type="text" id='ddlTextPosition' />
+                            </div>
+                            <div class="col-xs-6 db-col-right" id="textColorDiv">
+                                <div class="db-color-container">
+                                    <div class="db-color-input">
+                                            <input id="textColor" type="color">
+                                    </div>
+                                    <div class="db-color-btn">
+                                            <button id="fontColorBtn"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row db-prop-row">
+                            <div class="col-xs-6 db-col-left">
+                                    <div id="toolbarTextStyle"></div>
+                            </div>
+                            <div class="col-xs-6 db-col-right">
+                                    <div id="toolbarTextSubAlignment"></div>
+                            </div>
+                        </div>
+                        <div class="row db-prop-row" id='toolbarTextAlignmentDiv'>
+                                <div id="toolbarTextAlignment"></div>
+                        </div>
+                        <div class="row db-prop-row">
+                            <div class="col-xs-2 db-col-right db-prop-text-style" style="padding-top: 6px">
+                                <span class="db-prop-text-style">Opacity</span>
+                            </div>
+                            <div class="col-xs-8 db-col-left" style="padding-right:10px">
+                                <div id='opacityTextSlider'></div>
+                            </div>
+                            <div class="col-xs-2 db-col-right">
+                                <input id='textOpacityText' type="text" value='100%' class="db-readonly-input" readOnly="true"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id='mindMapContainer' class="db-mindmap-prop-container">
+                    <div class="row db-prop-header-text">
+                        MindMap Pattern
+                    </div>
+                    <div class="row db-prop-row">
+                        <div class="col-xs-6 org-pattern-parent">
+                            <div onclick="mindmapPropertyBinding.mindmapPatternChange(event)" class="mindmap-pattern-style mindmap-pattern1"></div>
+                        </div>
+                        <div class="col-xs-6 org-pattern-parent">
+                            <div onclick="mindmapPropertyBinding.mindmapPatternChange(event)" class="mindmap-pattern-style mindmap-pattern2"></div>
+                        </div>
+                    </div>
+                    <div class="row db-prop-row" style="margin-top:5px">
+                        <div class="col-xs-6 org-pattern-parent">
+                            <div onclick="mindmapPropertyBinding.mindmapPatternChange(event)" class="mindmap-pattern-style mindmap-pattern3"></div>
+                        </div>
+                        <div class="col-xs-6 org-pattern-parent">
+                            <div onclick="mindmapPropertyBinding.mindmapPatternChange(event)" class="mindmap-pattern-style mindmap-pattern4"></div>
+                        </div>
+                    </div>
+                    <div class="db-prop-separator">
+                    </div>
+                    <div class="row db-prop-header-text">
+                        MindMap Levels Styles
+                    </div>
+                    <div class="row db-prop-row">
+                        <div class="col-xs-6 db-col-left">
+                                <input type="text" id='mindMapLevels' />
+                        </div>
+                    </div>
+                    <div id='mindMapFill' class="row db-prop-row">
+                        <div class="col-xs-6 db-col-left">
+                            <div class="db-color-container">
+                                <div class="db-color-input">
+                                    <input id="mindmapFill" type="color">
+                                </div>
+                                <div class="db-color-btn">
+                                        <button id="mindmapFillIconBtn"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row db-prop-row">
+                        <div class="col-xs-4 db-col-left">
+                            <div class="db-color-container">
+                                <div class="db-color-input">
+                                        <input id="mindmapStroke" type="color">
+                                </div>
+                                <div class="db-color-btn">
+                                        <button id="mindmapStrokeIconBtn"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 db-col-center">
+                                <input type="text" id='strokeStyle' />
+                        </div>
+                        <div class="col-xs-4 db-col-right">
+                                <input id="mindmapStrokeWidth" type="text" />
+                        </div>
+                    </div>
+                    <div class="row db-prop-row">
+                        <div class="col-xs-2 db-col-right db-prop-text-style" style="padding-top: 6px">
+                            <span class="db-prop-text-style">Opacity</span>
+                        </div>
+                        <div class="col-xs-8 db-col-left" style="padding-right:10px">
+                                <div id='mindmapOpacitySlider'></div>
+                        </div>
+                        <div class="col-xs-2 db-col-right">
+                            <input type="text" readOnly="true" id="mindmapOpacityText" class="db-readonly-input" />
+                        </div>
+                    </div>
+                    <div style="margin-top:10px;margin-bottom: 15px"></div>
+                    <div class="row db-prop-header-text">
+                        Text Style
+                    </div>
+                    <div class="row db-prop-row">
+                        <div class="col-xs-8 db-col-left">
+                                <input type="text" id='mindmapFontFamilyList' />
+                        </div>
+                        <div class="col-xs-4 db-col-right">
+                                <input id="mindmapFontSize" type="text" />
+                        </div>
+                    </div>
+                    <div class="row db-prop-row">
+                        <div class="col-xs-6 db-col-left">
+                                <div id="mindmapTextStyleToolbar"></div>
+                        </div>
+                        <div class="col-xs-6 db-col-right" id="textColorDiv">
+                            <div class="db-color-container">
+                                <div class="db-color-input">
+                                        <input id="mindmapTextColor" type="color">
+                                </div>
+                                <div class="db-color-btn">
+                                        <button id="textColorIconBtn"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row db-prop-row">
+                        <div class="col-xs-2 db-col-right db-prop-text-style" style="padding-top: 6px">
+                            <span class="db-prop-text-style">Opacity</span>
+                        </div>
+                        <div class="col-xs-8 db-col-left" style="padding-right:10px">
+                                <div id='mindmapTextOpacitySlider'></div>
+                        </div>
+                        <div class="col-xs-2 db-col-right">
+                            <input type="text" id="textOpacityText" class="db-readonly-input" readOnly="true" />
+                        </div>
+                    </div>
+                </div>
+                <div id='orgChartContainer' class="db-orgchart-prop-container">
+                    <div class="row db-prop-row db-prop-header-text">
+                        Import
+                    </div>
+                    <div class="row db-prop-row" style="height:28px">
+                            <button id="btnImportData"></button>
+                    </div>
+                    <div class="db-prop-separator">
+                    </div>
+                    <div class="row db-prop-header-text">
+                        OrgChart Settings
+                    </div>
+                    <div class="row db-prop-row">
+                        <div class="col-xs-6 db-col-left">
+                            <span class="db-prop-text-style">Horizontal Spacing</span>
+                        </div>
+                        <div class="col-xs-6 db-col-right">
+                            <span class="db-prop-text-style">Vertical Spacing</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 db-col-left">
+                                <input id="orgHorizontalSpacing" type="text" />
+                        </div>
+                        <div class="col-xs-6 db-col-right">
+                                <input id="orgVerticalSpacing" type="text" />
+                        </div>
+                    </div>
+                    <div class="row db-prop-row">
+                            <div id="orgChartAlignment">
+                                </div>
+                    </div>
+                    <div class="db-prop-separator">
+                    </div>
+                    <div class="row db-prop-row db-prop-header-text">
+                        Orientation Styles
+                    </div>
+                    <div class="row db-prop-row">
+                        <div class="col-xs-6 org-pattern-parent">
+                            <div onclick="orgChartPropertyBinding.layoutOrientationChange(event)" class="org-pattern-style org-pattern-1 vertical-alternate"
+                                style="background-image: url('src/assets/dbstyle/orgchart_images/org-pattern1.svg')">
+                            </div>
+                        </div>
+                        <div class="col-xs-6 org-pattern-parent">
+                            <div onclick="orgChartPropertyBinding.layoutOrientationChange(event)" class="org-pattern-style org-pattern-2 vertical-left"
+                                style="background-image: url('src/assets/dbstyle/orgchart_images/org-pattern2.svg')"></div>
+                        </div>
+                    </div>
+                    <div class="row db-prop-row" style="margin-top:5px">
+                        <div class="col-xs-6 org-pattern-parent">
+                            <div onclick="orgChartPropertyBinding.layoutOrientationChange(event)" class="org-pattern-style org-pattern-3 vertical-right"
+                                style="background-image: url('src/assets/dbstyle/orgchart_images/org-pattern3.svg')"></div>
+                        </div>
+                        <div class="col-xs-6 org-pattern-parent">
+                            <div onclick="orgChartPropertyBinding.layoutOrientationChange(event)" class="org-pattern-style org-pattern-4 horizontal-center"
+                                style="background-image: url('src/assets/dbstyle/orgchart_images/org-pattern4.svg')"></div>
+                        </div>
+                    </div>
+                    <div class="row db-prop-row" style="margin-top:5px">
+                        <div class="col-xs-6 org-pattern-parent">
+                            <div onclick="orgChartPropertyBinding.layoutOrientationChange(event)" class="org-pattern-style org-pattern-5 horizontal-right"
+                                style="background-image: url('src/assets/dbstyle/orgchart_images/org-pattern5.svg');"></div>
+                        </div>
+                        <div class="col-xs-6 org-pattern-parent">
+                            <div onclick="orgChartPropertyBinding.layoutOrientationChange(event)" class="org-pattern-style org-pattern-6 horizontal-left"
+                                style="background-image: url('src/assets/dbstyle/orgchart_images/org-pattern6.svg')"></div>
+                        </div>
+                    </div>
+                    <div class="db-prop-separator">
+                    </div>
+                    <div class="row db-prop-header-text">
+                        OrgChart Templates
+                    </div>
+                    <div class="row db-prop-row">
+                        <div class="col-xs-6 org-pattern-parent">
+                            <div id="orgPattern1" onclick="orgChartPropertyBinding.layoutPatternChange(event)" class="org-pattern-style"></div>
+                        </div>
+                        <div class="col-xs-6 org-pattern-parent">
+                            <div id="orgPattern2" onclick="orgChartPropertyBinding.layoutPatternChange(event)" class="org-pattern-style"></div>
+                        </div>
+                    </div>
+                    <div class="row db-prop-row">
+                        <div class="col-xs-6 org-pattern-parent">
+                            <div id="orgPattern3" onclick="orgChartPropertyBinding.layoutPatternChange(event)" class="org-pattern-style"></div>
+                        </div>
+                        <div class="col-xs-6 org-pattern-parent">
+                            <div id="orgPattern4" onclick="orgChartPropertyBinding.layoutPatternChange(event)" class="org-pattern-style"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="exportDialog"></div>
+
+<div id="printDialog"></div>
+
+<div id="fileUploadDialog"></div>
+
+<div id="diagramTemplateDiv" class="db-diagram-template-div" style="display: none">
+    <div class="db-diagram-template-image-div">
+        <div class="db-diagram-template-image">
+        </div>
+    </div>
+    <div class="db-diagram-template-text">
+        <span id="diagramTemplateText"></span>
+    </div>
+</div>
+
+<div id="diagramTemplateDiv1" style="display: none">
+    <div class="row">
+        <div class="col-xs-3 temp-left-pane">
+            <div class="row db-diagram-template-parent-text flowdiagram-template">
+                <span>Flow Chart</span>
+            </div>
+            <div class="row db-diagram-template-parent-text mindmap-template">
+                <span>Mind Map</span>
+            </div>
+            <div class="row db-diagram-template-parent-text orgchart-template">
+                <span>Org Chart</span>
+            </div>
+        </div>
+        <div class="col-xs-9 diagramTemplates temp-right-pane" style="padding-left:0px;padding-right:0px">
+        </div>
+    </div>
+</div>
+
+<div id="openTemplateDialog"></div>
+
+<div id="saveDialog"></div>
+
+<div id="moreShapesDialogContent"></div>
+
+<div id="tooltipDialog"></div>
+
+<div id="hyperlinkDialog"></div>
+
+<div class="db-custom-prop-template" style="display:none">
+    <div class="row">
+        <div class="col-xs-6 db-col-left" style="width:70%">
+            <input class="txtPropertyName" type="text" placeholder="Enter Property Name" style="width:100%; height:27px">
+        </div>
+        <div class="col-xs-6 db-col-right" style="width:30%">
+            <button class="db-custom-prop-button" style="width:100%; text-transform: none;box-shadow: 0 0 0 0">Add Property</button>
+        </div>
+    </div>
+</div>
+
+<div class="db-custom-prop-info-template" style="display:none">
+    <div class="row">
+        <div class="col-xs-6 db-col-left propertyNameDiv">
+        </div>
+        <div class="col-xs-6 db-col-right propertyValueDiv">
+            <input type="text" class="propertyValue" style="height: 27px" />
+        </div>
+        <div class="propertyTooltipDiv">
+            <input type="checkbox" class="propertyCheckBox" />
+        </div>
+        <div class="propertyLabelDiv">
+            <button class="btnRemoveProperty" style="height: 20px; width: 27px"></button>
+        </div>
+    </div>
+</div>
+
+<div class="db-place-holder" style="display:none">
+    <div class="row">
+        <input type="checkbox" class="chkPlaceholders" />
+    </div>
+</div>
+
+<div id="customPropertyDialog"></div>
+
+<div class="db-layer-template" style="display: none">
+    <div class="row">
+        <div class="db-layer-content-name">
+            <span class="db-layer-name"></span>
+            <input type="text" class="db-layer-edit" />
+        </div>
+        <div class="db-layer-content-btn">
+            <button class="db-layer-lock"></button>
+        </div>
+        <div class="db-layer-content-btn">
+            <button class="db-layer-visible"></button>
+        </div>
+    </div>
+</div>
+
+<div id="layerDialog"></div>
+
+<div id="themeDialog"></div>
+
+<div id="deleteConfirmationDialog"></div>
