@@ -269,6 +269,11 @@ var DiagramPropertyBinding = (function () {
             selectedItem.pageSettings.pageBreaks = args.checked;
             selectedItem.selectedDiagram.pageSettings.showPageBreaks = args.checked;
         }
+    }; 
+    DiagramPropertyBinding.prototype.multiplePage = function (args) {
+        if (args.event) {
+            selectedItem.printSettings.multiplePage = args.checked; 
+        }
     };
     DiagramPropertyBinding.prototype.paperListChange = function (args) {
         if (args.element) {

@@ -6,24 +6,25 @@
     "license": "SEE LICENSE IN license",
     "dependencies": {
         "@syncfusion/ej2": "*",
-        "browser-sync": "^2.26.3",
         "cheerio": "^1.0.0-rc.1",
         "crossroads": "^0.12.2",
-        "gulp": "^3.9.1",
-        "hasher": "^1.2.0",
-        "webpack": "^2.5.1",
-        "webpack-stream": "^4.0.0"
+        "hasher": "^1.2.0"
     },
     "devDependencies": {
+        "@syncfusion/ej2-build": "*",
         "elasticlunr": "0.9.5",
-        "fuse.js": "^3.2.0",
         "gulp-jshint": "^2.0.1",
-        "jshint": "^2.9.2",
-        "run-sequence": "^2.2.1"
+        "fuse.js": "^3.2.0",
+        "jshint": "^2.9.2"
     },
     "scripts": {
-        "test": "gulp js-hint ",
-        "serve": "gulp serve",
-        "build": "gulp build"
+        "test": "gulp js-hint && gulp build",
+        "ci-publish": "gulp publish-samples"
+    },
+    "config": {
+        "ghooks": {
+            "pre-commit": "npm run test",
+            "commit-msg": "gulp commit-message"
+        }
     }
 }

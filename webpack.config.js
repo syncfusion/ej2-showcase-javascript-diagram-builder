@@ -9,15 +9,6 @@ module.exports = {
         libraryTarget: 'this'
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            beautify: false,
-            output: {
-                comments: false
-            },
-            compress: {
-                warnings: false,
-                unused: true
-            }
-        })
+
     ]
 }

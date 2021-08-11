@@ -17,6 +17,6 @@
     function routeDefault() {
         crossroads.addRoute('', function () {
             window.location.href = '#/home';
-            hasher.setHash("home");
+            crossroads.hasher("home");
         });
     }
