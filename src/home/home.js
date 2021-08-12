@@ -19,7 +19,6 @@ var diagramThemes = new DiagramTheme(selectedItem);
 
 
 window.onload = function () {
-    setTimeout(function () {
     diagram = document.getElementById("diagram").ej2_instances[0];
     symbolpalette = document.getElementById("symbolpalette").ej2_instances[0];
     openTemplateDialog = document.getElementById("openTemplateDialog").ej2_instances[0];
@@ -54,7 +53,7 @@ window.onload = function () {
     document.getElementById('btnHideToolbar').onclick = hideMenuBar.bind(this);
     document.getElementById('diagramContainerDiv').onmouseleave = diagramThemes.setNodeOldStyles.bind(diagramThemes);
     document.onmouseover = menumouseover.bind(this);
-    }, 100);
+
 
     setTimeout(function () { loadPage(); }, 2000);
     setInterval(function() { savePage(); }, 2000);
@@ -1099,7 +1098,9 @@ window.home = function () {
     printLandscape.appendTo('#printLandscape');
 
     // checkbox template for printDialog control
-    var printMultiplePage = new ej.buttons.CheckBox({ label: 'Scale to fit 1 page', checked: selectedItem.printSettings.multiplePage });
+    var printMultiplePage = new ej.buttons.CheckBox({ label: 'Scale to fit 1 page', checked: selectedItem.printSettings.multiplePage,
+    change: function (args) { DiagramPropertyBinding.prototype.multiplePage(args); }
+    });
     printMultiplePage.appendTo('#printMultiplePage');
 
     //doubt dialog
