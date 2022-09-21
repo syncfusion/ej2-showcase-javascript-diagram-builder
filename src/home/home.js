@@ -740,22 +740,8 @@ window.home = function () {
        }
     });
     SegmentEditing.appendTo('#SegmentEditing');
-    selectedItem.connectorProperties.SegmentEditing = SegmentEditing;
-//     function SegmentEditing(args){
-//     if(diagram.selectedItems.connectors){
-//         if(args.checked == true){
-//             for(i=0;i<diagram.selectedItems.connectors.length;i++){
-//                 diagram.selectedItems.connectors[i].constraints = ej.diagrams.ConnectorConstraints.Default | ej.diagrams.ConnectorConstraints.DragSegmentThumb;
-//             }
-//         }
-//         else{
-//             for(i=0;i<diagram.selectedItems.connectors.length;i++){
-//             diagram.selectedItems.connectors[i].constraints = ej.diagrams.ConnectorConstraints.Default & ~(ej.diagrams.ConnectorConstraints.DragSegmentThumb);
-//             }
-//         }
-//         diagram.dataBind();
-//     }
-// }
+    selectedItem.connectorProperties.SegmentEditing = SegmentEditing; 
+    
     var default1 = new ej.inputs.Slider({
         min: 0,
         max: 100,
